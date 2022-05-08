@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>ECAPP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}" />
+		<noscript><link rel="stylesheet" href="{{ url_for('static', filename='assets/css/noscript.css') }}" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<a href="{{ url_for('index') }}" class="logo"><strong>ECAPP</strong> <span></span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="{{ url_for('index') }}">Home</a></li>
+							<li><a href="{{ url_for('maritimes') }}">Maritimes</a></li>
+							<li><a href="{{ url_for('quebec') }}">Quebec</a></li>
+							<li><a href="{{ url_for('ontario') }}">Ontario</a></li>
+							<li><a href="{{ url_for('prairies') }}">The Prairies</a></li>
+							<li><a href="{{ url_for('bc') }}">British Columbia</a></li>
+							<li><a href="{{ url_for('north') }}">The North</a></li>
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="#" class="button primary fit">Get Started</a></li>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner" class="major">
+						<div class="inner">
+							<header class="major">
+								<h2>Download Climate Data from Environment Canada</h2>
+							</header>
+							<span class="image">
+								<img src="{{ url_for('static', filename='images/banner.jpg') }}" alt="" />
+							</span>
+							<div class="content">
+								<p>An indepdendent, open-source user interface to all <br />
+								observation climate data from Environment Canada.</p>
+								<ul class="actions">
+									<li><a href="#one" class="button next scrolly">Get Started</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one" class="tiles">
+								<article>
+									<span class="image">
+										<img src="{{ url_for('static', filename='images/maritimes.png') }}" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('maritimes') }}" class="link">The Maritimes</a></h3>
+										<p>Open Map</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="{{ url_for('static', filename='images/quebec.jpg') }}" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('quebec') }}" class="link">Quebec</a></h3>
+										<p>Open Map</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="{{ url_for('static', filename='images/ontario.jpg') }}" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('ontario') }}" class="link">Ontario</a></h3>
+										<p>Open Map</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="{{ url_for('static', filename='images/prairies.jpg') }}" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('prairies') }}" class="link">The Prairies</a></h3>
+										<p>Open Map</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="{{ url_for('static', filename='images/bc.jpg') }}" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('bc') }}" class="link">British Columbia</a></h3>
+										<p>Open Map</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="{{ url_for('static', filename='images/north.jpg') }}" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="{{ url_for('north') }}" class="link">The North</a></h3>
+										<p>Open Map</p>
+									</header>
+								</article>
+							</section>
+
+						<!-- Two -->
+							<section id="two">
+								<div class="inner">
+									<header class="major">
+										<h2>About</h2>
+									</header>
+									<p>I am an early career climate scientist in Canada, and I built this website as a personal project. <br />
+										This website is not official, and is not supported or recommended for use by Environment Canada.
+									</p>
+								</div>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="https://github.com/HarrySng" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								<li><a href="https://twitter.com/climcode" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="https://www.linkedin.com/in/harrysng" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+							</ul>
+							<ul class="copyright">
+								<li>&copy; Harry Singh</li><li>Design Credit: <a href="https://html5up.net/forty">FORTY BY HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrolly.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/jquery.scrollex.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/browser.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/breakpoints.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/util.js') }}"></script>
+			<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+	</body>
+</html>

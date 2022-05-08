@@ -24,8 +24,9 @@ def wrapper():
     ]
 
     def load_stations(
+        provinces,
         file = 'Station Inventory EN.csv', skip = 3,
-        drop_cols=drop_cols, new_cols=new_cols
+        drop_cols=drop_cols, new_cols=new_cols,
         ):
         """Load and cleanup station inventory file
     
@@ -49,20 +50,20 @@ def wrapper():
         # Rename remaining columns
         df.columns = new_cols
     
+        # FIlter on province
+        df = df[df['province'].isin(provinces)]
+
         # drop if all three date range columns are null
         df = df.dropna(
             subset=['hlystartyear', 'dlystartyear', 'mlystartyear'], how='all'
         )
-    
+
         # Calculate data lengths for use later
         df['hlyyears'] = df['hlyendyear'] - df['hlystartyear'] + 1
         df['dlyyears'] = df['dlyendyear'] - df['dlystartyear'] + 1
         df['mlyyears'] = df['mlyendyear'] - df['mlystartyear'] + 1
     
         return df
-    
-    # Initialize map object
-    m = folium.Map([60, -100], zoom_start=4)
     
     def create_popups(df):
         popups = []
@@ -72,7 +73,7 @@ def wrapper():
                     <body style="font-size: 12px;">
                     <h1>{name}, {prov}</h1>
                     <h2>Climate ID: {id}</h2>
-                    <h2>Coordinates: {lat}, {lon}</h2>
+                    <h4>Coordinates: {lat}, {lon}</h4>
                     <table style="width: 370px; border:1px solid black;">
                         <tr>
                             <th style="border:1px solid black; text-align: center; vertical-align: middle;">Frequency</th>
@@ -128,12 +129,26 @@ def wrapper():
         plugins.MarkerCluster(locs, popups = popups).add_to(m)
         return
 
+    # Province filters
+    prov_dict = {
+        'maritimes': [
+            'NEW BRUNSWICK', 'NEWFOUNDLAND', 
+            'NOVA SCOTIA', 'PRINCE EDWARD ISLAND'
+            ],
+        'prairies': ['ALBERTA', 'MANITOBA', 'SASKATCHEWAN'],
+        'north': ['YUKON', 'NUNAVUT', 'NORTHWEST TERRITORIES'],
+        'ontario': ['ONTARIO'],
+        'quebec': ['QUEBEC'],
+        'bc': ['BRITISH COLUMBIA']
+    }
 
     # Add markers in clusters, and assing popups
-    df = load_stations()
-    popups = create_popups(df)
-    add_marker_cluster(df, m, popups)
-    m.save('templates/ecmap.html')
+    for prov in prov_dict:
+        df = load_stations(prov_dict[prov])
+        m = folium.Map([60, -100], zoom_start=3)
+        popups = create_popups(df)
+        add_marker_cluster(df, m, popups)
+        m.save('templates/' + prov + '.html')
 
 if __name__ == '__main__':
     wrapper()
