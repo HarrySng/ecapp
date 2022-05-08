@@ -70,6 +70,8 @@ def wrapper():
         for i, row in df.iterrows():
             html = """<!DOCTYPE html>
                 <html>
+                    <style>
+                    </style>
                     <body style="font-size: 12px;">
                     <h1>{name}, {prov}</h1>
                     <h2>Climate ID: {id}</h2>
@@ -100,6 +102,10 @@ def wrapper():
                             <td style="border:1px solid black; text-align: center; vertical-align: middle;">{mtl}</td>
                         </tr>
                     </table>
+                    <br>
+                    <form action="https://www.google.com/" method="get" target="_blank">
+                        <button type="submit" style="background-color: #242943;color: #ffffff;border: solid 1.5px #242943;border-radius: 0;font-size: 1.5em;font-weight: 600;height: 4.5em;letter-spacing: 0.3em;padding: 0 1.75em;text-align: center;cursor: pointer;">DOWNLOAD</button>
+                    </form>
                     </body>
                 </html>
             """.format(

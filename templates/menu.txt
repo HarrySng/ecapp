@@ -1,0 +1,36 @@
+Add these to map html at the top, with stylesheets.
+    <link rel="stylesheet" href="../static/assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="../static/assets/css/noscript.css" /></noscript>
+
+Paste this in the body tag of each map.
+    <div id="wrapper" style="background-color:#2a2f4a">
+        <header id="header" class="alt">
+            <a href="{{ url_for('index') }}" class="logo"><strong>ECAPP</strong> <span></span></a>
+            <nav>
+                <a href="#menu"></a>
+            </nav>
+        </header>
+
+    <!-- Menu -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('maritimes') }}">Maritimes</a></li>
+                <li><a href="{{ url_for('quebec') }}">Quebec</a></li>
+                <li><a href="{{ url_for('ontario') }}">Ontario</a></li>
+                <li><a href="{{ url_for('prairies') }}">The Prairies</a></li>
+                <li><a href="{{ url_for('bc') }}">British Columbia</a></li>
+                <li><a href="{{ url_for('north') }}">The North</a></li>
+            </ul>
+            <ul class="actions stacked">
+                <li><a href="#" class="button primary fit">Get Started</a></li>
+            </ul>
+        </nav>
+    </div>
+    <script src="../static/assets/js/jquery.min.js"></script>
+    <script src="../static/assets/js/jquery.scrolly.min.js"></script>
+    <script src="../static/assets/js/jquery.scrollex.min.js"></script>
+    <script src="../static/assets/js/browser.min.js"></script>
+    <script src="../static/assets/js/breakpoints.min.js"></script>
+    <script src="../static/assets/js/util.js"></script>
+    <script src="../static/assets/js/main.js"></script>   

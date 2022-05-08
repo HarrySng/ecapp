@@ -1,5 +1,3 @@
-import os
-from create_map import *
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -33,8 +31,4 @@ def north():
     return render_template('north.html')
 
 if __name__ == '__main__':
-    # Create the map if it doesn't exist
-    if not os.path.exists('templates/ontario.html'):
-        wrapper()
-    # Run the app
     app.run(debug=True)
