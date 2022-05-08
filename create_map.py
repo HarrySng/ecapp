@@ -4,10 +4,12 @@ Date: 2022-04-13
 """
 import folium
 import branca
+import jinja2
 import numpy as np
 import pandas as pd
 from folium import plugins
 from folium.plugins import Search
+from branca.element import Element
 
 def wrapper():
     drop_cols = [
@@ -74,38 +76,36 @@ def wrapper():
                     </style>
                     <body style="font-size: 12px;">
                     <h1>{name}, {prov}</h1>
-                    <h2>Climate ID: {id}</h2>
+                    <h2 id="climid">Climate ID: {id}</h2>
                     <h4>Coordinates: {lat}, {lon}</h4>
                     <table style="width: 370px; border:1px solid black;">
                         <tr>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle;">Frequency</th>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle;">Start Year</th>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle;">End Year</th>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle;">Total Years</th>
+                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Frequency</th>
+                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Start Year</th>
+                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">End Year</th>
+                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Total Years</th>
                         </tr>
                         <tr>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">Hourly Data</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">{h1}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">{h2}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">{htl}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Hourly Data</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{h1}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{h2}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{htl}</td>
                         </tr>
                         <tr>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">Daily Data</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">{d1}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">{d2}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">{dtl}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Daily Data</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{d1}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{d2}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{dtl}</td>
                         </tr>
                         <tr>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">Monthly Data</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">{m1}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">{m2}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle;">{mtl}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Monthly Data</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{m1}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{m2}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{mtl}</td>
                         </tr>
                     </table>
                     <br>
-                    <form action="https://www.google.com/" method="get" target="_blank">
-                        <button type="submit" style="background-color: #242943;color: #ffffff;border: solid 1.5px #242943;border-radius: 0;font-size: 1.5em;font-weight: 600;height: 4.5em;letter-spacing: 0.3em;padding: 0 1.75em;text-align: center;cursor: pointer;">DOWNLOAD</button>
-                    </form>
+                    <button onclick="test()" style="background-color: #242943;color: #ffffff;border: solid 1.5px #242943;border-radius: 0;font-size: 1.5em;font-weight: 600;height: 4.5em;letter-spacing: 0.3em;padding: 0 1.75em;text-align: center;cursor: pointer;">EXECUTE</button>
                     </body>
                 </html>
             """.format(
@@ -124,8 +124,10 @@ def wrapper():
                 m2=int(row['mlyendyear']) if not np.isnan(row['mlyendyear']) else 'NA',
                 mtl=int(row['mlyyears']) if not np.isnan(row['mlyyears']) else 'NA'
             )
-            iframe = folium.IFrame(html=html, width=400, height=400)
-            popup = folium.Popup(iframe, max_width=2650)
+            #iframe = folium.IFrame(html=html, width=400, height=400)
+            #popup = folium.Popup(iframe, max_width=2650)
+            ele_html = folium.Html(html, script=True)
+            popup = folium.Popup(ele_html, max_width=2650)
             popups.append(popup)
         return popups
                 
