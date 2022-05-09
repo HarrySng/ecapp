@@ -23,9 +23,10 @@ docker run -d -p 5000:5000 ecapp-docker
 docker ps
 ```
 
-6. Stop the container with the following command.
+6. Access the app in your browser at the following address: <http://127.0.0.1:5000/>
+
+7. Stop the container with the following command.
 
 ```zsh
 docker stop <container-name>
 ```
-
