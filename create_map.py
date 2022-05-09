@@ -80,35 +80,36 @@ def wrapper():
                     <h4>Coordinates: {lat}, {lon}</h4>
                     <table style="width: 370px; border:1px solid black;">
                         <tr>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Frequency</th>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Start Year</th>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">End Year</th>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Total Years</th>
+                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.3em;font-weight: 600;">Frequency</th>
+                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.3em;font-weight: 600;">Start Year</th>
+                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.3em;font-weight: 600;">End Year</th>
+                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.3em;font-weight: 600;">Total Years</th>
                         </tr>
                         <tr>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Hourly Data</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{h1}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{h2}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{htl}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">Hourly Data</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{h1}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{h2}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{htl}</td>
                         </tr>
                         <tr>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Daily Data</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{d1}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{d2}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{dtl}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">Daily Data</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{d1}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{d2}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{dtl}</td>
                         </tr>
                         <tr>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">Monthly Data</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{m1}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{m2}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a;">{mtl}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">Monthly Data</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{m1}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{m2}</td>
+                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{mtl}</td>
                         </tr>
                     </table>
                     <br>
-                    <button onclick="test()" style="background-color: #242943;color: #ffffff;border: solid 1.5px #242943;border-radius: 0;font-size: 1.5em;font-weight: 600;height: 4.5em;letter-spacing: 0.3em;padding: 0 1.75em;text-align: center;cursor: pointer;">EXECUTE</button>
+                    <button onclick="downloadDailyFiles('{sid}','{d1}','{d2}')" style="background-color: #242943;color: #ffffff;border: solid 1.5px #242943;border-radius: 0;font-size: 1.5em;font-weight: 600;height: 2em;letter-spacing: 0.3em;padding: 0 1em;text-align: center;cursor: pointer;">Download Daily Data</button>
                     </body>
                 </html>
             """.format(
+                sid = row['stationid'],
                 name=row['name'], 
                 prov=row['province'],
                 id=row['climateid'],

@@ -1,6 +1,7 @@
 Add these to map html at the top, with stylesheets.
-    <script src="../static/custom/js/test.js" type="text/javascript"></script> 
+    <script src="../static/custom/js/downloadFiles.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../static/assets/css/main.css" />
+    <link rel="stylesheet" href="../static/custom/css/progBar.css"/>
 	<noscript><link rel="stylesheet" href="../static/assets/css/noscript.css" /></noscript>
 
 Paste this in the body tag of each map.
@@ -27,6 +28,9 @@ Paste this in the body tag of each map.
                 <li><a href="#" class="button primary fit">Get Started</a></li>
             </ul>
         </nav>
+    </div>
+    <div id="overlay">
+        <div id="myBar">10%</div>
     </div>
     <script src="../static/assets/js/jquery.min.js"></script>
     <script src="../static/assets/js/jquery.scrolly.min.js"></script>
