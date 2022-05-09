@@ -3,13 +3,9 @@ Author: Harry Singh
 Date: 2022-04-13
 """
 import folium
-import branca
-import jinja2
 import numpy as np
 import pandas as pd
 from folium import plugins
-from folium.plugins import Search
-from branca.element import Element
 
 def wrapper():
     drop_cols = [
