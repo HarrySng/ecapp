@@ -63,45 +63,46 @@ def wrapper():
     
         return df
     
+    def conv_int(row, col):
+        iy = int(row[col]) if not np.isnan(row[col]) else 'NA'
+        return iy
+
     def create_popups(df):
         popups = []
         for i, row in df.iterrows():
+            h1 = conv_int(row, 'hlystartyear')
+            h2 = conv_int(row, 'hlyendyear')
+            d1 = conv_int(row, 'dlystartyear')
+            d2 = conv_int(row, 'dlyendyear')
+            m1 = conv_int(row, 'mlystartyear')
+            m2 = conv_int(row, 'mlyendyear')
+
+            hly_btn_title = f'Download Hourly Data ({h1} - {h2})'
+            dly_btn_title = f'Download Daily Data ({d1} - {d2})'
+            mly_btn_title = f'Download Monthly Data ({m1} - {m2})'
+
+            if h1 == 'NA' or h2 == 'NA':
+                hly_btn_title = 'Hourly Data Not Available'
+            
+            if d1 == 'NA' or d2 == 'NA':
+                dly_btn_title = 'Daily Data Not Available'
+            
+            if m1 == 'NA' or m2 == 'NA':
+                mly_btn_title = 'Monthly Data Not Available'
+
             html = """<!DOCTYPE html>
                 <html>
                     <style>
                     </style>
                     <body style="font-size: 12px;">
-                    <h1>{name}, {prov}</h1>
-                    <h2 id="climid">Climate ID: {id}</h2>
-                    <h4>Coordinates: {lat}, {lon}</h4>
-                    <table style="width: 370px; border:1px solid black;">
-                        <tr>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.3em;font-weight: 600;">Frequency</th>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.3em;font-weight: 600;">Start Year</th>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.3em;font-weight: 600;">End Year</th>
-                            <th style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.3em;font-weight: 600;">Total Years</th>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">Hourly Data</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{h1}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{h2}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{htl}</td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">Daily Data</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{d1}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{d2}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{dtl}</td>
-                        </tr>
-                        <tr>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">Monthly Data</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{m1}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{m2}</td>
-                            <td style="border:1px solid black; text-align: center; vertical-align: middle; color: #2a2f4a; font-size: 1.2em;font-weight: 500;">{mtl}</td>
-                        </tr>
-                    </table>
-                    <br>
-                    <button onclick="downloadDailyFiles('{sid}','{d1}','{d2}')" style="background-color: #242943;color: #ffffff;border: solid 1.5px #242943;border-radius: 0;font-size: 1.5em;font-weight: 600;height: 2em;letter-spacing: 0.3em;padding: 0 1em;text-align: center;cursor: pointer;">Download Daily Data</button>
+                    <h2>{name}, {prov}</h2>
+                    <h3 id="climid">Climate ID: {id}</h3>
+                    <br><br>
+                    <button onclick="downloadHourlyFiles('{sid}','{h1}','{h2}')" style="background-color: #242943;color: #ffffff;border: solid 1.5px #242943;border-radius: 0;font-size: 1.5em;font-weight: 600;height: 2em;letter-spacing: 0.3em;padding: 0 1em;text-align: center;cursor: pointer;">{hbt}</button>
+                    <br><br>
+                    <button onclick="downloadDailyFiles('{sid}','{d1}','{d2}')" style="background-color: #242943;color: #ffffff;border: solid 1.5px #242943;border-radius: 0;font-size: 1.5em;font-weight: 600;height: 2em;letter-spacing: 0.3em;padding: 0 1em;text-align: center;cursor: pointer;">{dbt}</button>
+                    <br><br>
+                    <button onclick="downloadMonthlyFiles('{sid}','{m1}','{m2}')" style="background-color: #242943;color: #ffffff;border: solid 1.5px #242943;border-radius: 0;font-size: 1.5em;font-weight: 600;height: 2em;letter-spacing: 0.3em;padding: 0 1em;text-align: center;cursor: pointer;">{mbt}</button>
                     </body>
                 </html>
             """.format(
@@ -109,20 +110,11 @@ def wrapper():
                 name=row['name'], 
                 prov=row['province'],
                 id=row['climateid'],
-                lat=row['latitude'], 
-                lon=row['longitude'],
-                h1=int(row['hlystartyear']) if not np.isnan(row['hlystartyear']) else 'NA',
-                h2=int(row['hlyendyear']) if not np.isnan(row['hlyendyear']) else 'NA',
-                htl=int(row['hlyyears']) if not np.isnan(row['hlyyears']) else 'NA',
-                d1=int(row['dlystartyear']) if not np.isnan(row['dlystartyear']) else 'NA',
-                d2=int(row['dlyendyear']) if not np.isnan(row['dlyendyear']) else 'NA',
-                dtl=int(row['dlyyears']) if not np.isnan(row['dlyyears']) else 'NA',
-                m1=int(row['mlystartyear']) if not np.isnan(row['mlystartyear']) else 'NA',
-                m2=int(row['mlyendyear']) if not np.isnan(row['mlyendyear']) else 'NA',
-                mtl=int(row['mlyyears']) if not np.isnan(row['mlyyears']) else 'NA'
+                hbt=hly_btn_title,
+                dbt=dly_btn_title,
+                mbt=mly_btn_title,
+                h1=h1,h2=h2,d1=d1,d2=d2,m1=m1,m2=m2
             )
-            #iframe = folium.IFrame(html=html, width=400, height=400)
-            #popup = folium.Popup(iframe, max_width=2650)
             ele_html = folium.Html(html, script=True)
             popup = folium.Popup(ele_html, max_width=2650)
             popups.append(popup)

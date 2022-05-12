@@ -18,6 +18,19 @@ function downloadDailyFiles(id,d1,d2) {
   }
 }
 
+function downloadHourlyFiles(id,d1,d2) {
+  // Placeholder. Not implemented yet.
+  alert('Feature not available yet. Please check back on Github later.')
+  return
+}
+
+function downloadMonthlyFiles(id,d1,d2) {
+  // Placeholder. Not implemented yet.
+  alert('Feature not available yet. Please check back on Github later.')
+  return
+}
+
+
 function download_files(files, sleep) {
     // Code for progress bar
     var k = 0;
